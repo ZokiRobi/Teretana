@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TeretanaModelStoreContainer" CdmEntityContainer="TeretanaEntities">
+    <EntitySetMapping Name="AktivnaClanarina">
+      <EntityTypeMapping TypeName="TeretanaModel.AktivnaClanarina">
+        <MappingFragment StoreEntitySet="AktivnaClanarina">
+          <ScalarProperty Name="AktivnaClanarina1" ColumnName="AktivnaClanarina" />
+          <ScalarProperty Name="ClanoviId" ColumnName="ClanoviId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clanarina">
+      <EntityTypeMapping TypeName="TeretanaModel.Clanarina">
+        <MappingFragment StoreEntitySet="Clanarina">
+          <ScalarProperty Name="ClanarinaId" ColumnName="ClanarinaId" />
+          <ScalarProperty Name="ClanoviId" ColumnName="ClanoviId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clanovi">
+      <EntityTypeMapping TypeName="TeretanaModel.Clanovi">
+        <MappingFragment StoreEntitySet="Clanovi">
+          <ScalarProperty Name="ClanoviId" ColumnName="ClanoviId" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="VremeOd" ColumnName="VremeOd" />
+          <ScalarProperty Name="VremeDo" ColumnName="VremeDo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeaktivnaClanarina">
+      <EntityTypeMapping TypeName="TeretanaModel.DeaktivnaClanarina">
+        <MappingFragment StoreEntitySet="DeaktivnaClanarina">
+          <ScalarProperty Name="DeaktivnaClanarina1" ColumnName="DeaktivnaClanarina" />
+          <ScalarProperty Name="ClanoviId" ColumnName="ClanoviId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

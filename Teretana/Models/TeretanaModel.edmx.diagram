@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="37947694cffd4c8087ade726380f480b" Name="Diagram1">
+        <EntityTypeShape EntityType="TeretanaModel.AktivnaClanarina" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeretanaModel.Clanarina" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeretanaModel.Clanovi" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="TeretanaModel.DeaktivnaClanarina" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <AssociationConnector Association="TeretanaModel.FK_AktivnaClanarina_Clanovi" ManuallyRouted="false" />
+        <AssociationConnector Association="TeretanaModel.FK_Clanarina_Clanovi" ManuallyRouted="false" />
+        <AssociationConnector Association="TeretanaModel.FK_DeaktivnaClanarina_Clanovi" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

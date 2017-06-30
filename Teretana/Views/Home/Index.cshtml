@@ -1,0 +1,118 @@
+﻿@model IPagedList<Teretana.Models.Clanovi>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+<h2>Svi clanovi</h2>
+
+<p>
+    @Html.ActionLink("Dodaj Novog Clana", "DodajClana",null,new {@class="btn btn-primary" })
+</p>
+<div>
+    @Html.PagedListPager(Model,page => Url.Action("Index",new{page,ViewBag.searchTerm }))
+</div>
+<div>
+    @using (Ajax.BeginForm("",new {Searched = true}, new AjaxOptions
+    {
+        UpdateTargetId = "table",
+        HttpMethod = "get",
+        InsertionMode = InsertionMode.Replace
+    }))
+    {
+        <input style="display:inline-block" type="search" id="search" value="" class="form-control" name="searchTerm" data-ter-autocomplete="@Url.Action("AutoComplete")"/>
+        <input type="submit" value="Trazi Clana" class="btn" />
+    }
+</div>
+<br />
+<table class="table" id="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Ime)
+            @using (Ajax.BeginForm("",new { searchTerm = ViewBag.searchTerm, page = ViewBag.page ?? 1 }, new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "table"
+            }))
+            {
+                <input type="hidden" name="sortBy" value="name" />
+                <button type="submit"><span class="glyphicon glyphicon-arrow-down"></span></button>
+            }
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Prezime)
+            @using (Ajax.BeginForm("", new { searchTerm = ViewBag.searchTerm, page = ViewBag.page ?? 1 }, new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "table"
+            }))
+            {
+                <input type="hidden" name="sortBy" value="Prezime" />
+                <button type="submit"><span class="glyphicon glyphicon-arrow-down"></span></button>
+            }
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().VremeOd)
+            @using (Ajax.BeginForm("", new { searchTerm = ViewBag.searchTerm, page = ViewBag.page ?? 1 }, new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "table"
+            }))
+            {
+                <input type="hidden" name="sortBy" value="VremeOd" />
+                <button title="Sort by Vreme pocetka" type="submit"><span class="glyphicon glyphicon-arrow-down"></span></button>
+            }
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().VremeDo)
+            @using (Ajax.BeginForm("", new { searchTerm = ViewBag.searchTerm, page = ViewBag.page ?? 1 }, new AjaxOptions
+            {
+                HttpMethod = "get",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "table"
+            }))
+            {
+                <input type="hidden" name="sortBy" value="VremeDo" />
+                <button type="submit"><span class="glyphicon glyphicon-arrow-down"></span></button>
+            }
+        </th>
+        <th></th>
+    </tr>
+    @Html.Partial("_Clanovi", Model)
+</table>
+
+<script src="~/Scripts/jquery-1.12.4.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+<script>
+    $('a.delete').click(function () {
+        if (!confirm("Obrisi clana?")) {
+            return false;
+        }
+    });
+
+    var submitForm = function (event, ui) {
+        var input = $(this);
+
+        input.val(ui.item.label);
+
+        $(input.parents('form:first')).submit();
+    };
+
+    var createAutoComplete = function () {
+        var $input = $(this);
+
+        var options = {
+            source: $input.attr('data-ter-autocomplete'),
+            select: submitForm
+        };
+
+        $input.autocomplete(options);
+    };
+
+    $('input#search').each(createAutoComplete);
+
+</script>

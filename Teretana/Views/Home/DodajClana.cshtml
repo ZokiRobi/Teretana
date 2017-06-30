@@ -1,0 +1,93 @@
+﻿@model Teretana.Models.Clanovi
+
+@{
+    ViewBag.Title = "Dodaj Clana";
+    string naziv = Model == null ? "Create" : "Edit";
+}
+
+<h2>Dodaj Clana</h2>
+
+
+@using (Html.BeginForm("DodajClana", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Ime, new { htmlAttributes = new { @class = "form-control", placeholder = "Ime.." } })
+                @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @{
+            if (Model != null)
+            {
+                @Html.HiddenFor(x => x.ClanoviId)
+            }
+        }
+        <div class="form-group">
+            @Html.LabelFor(model => model.Prezime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Prezime, new { htmlAttributes = new { @class = "form-control", placeholder = "Prezime.." } })
+                @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VremeOd, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VremeOd, new { htmlAttributes = new { @class = "form-control", placeholder = "Format - 1 Jan 20015" } })
+                @Html.ValidationMessageFor(model => model.VremeOd, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.VremeDo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.VremeDo, new { htmlAttributes = new { @class = "form-control", placeholder = "Format - 1 Jan 2015" } })
+                @Html.ValidationMessageFor(model => model.VremeDo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="@naziv" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+            }
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    // Automatski ubacivanje danasnjeg datuma ako nije uneseno
+
+    $('input#VremeOd').blur(function () {
+        var d = new Date().toLocaleDateString();
+        $(this).attr('value', d);
+    });
+
+
+    // Ako nije uneseno Vreme Do onda ce postaviti vreme za mesec dana od danasnjeg datuma
+    var vrednost = $('input#VremeDo').attr('value');
+    var dat = new Date();
+    var day = dat.getDate();
+    var month = dat.getMonth() + 1;
+    var year = dat.getFullYear();
+    var date = new Date(year, month, day);
+    var n = date.setMonth(date.getMonth());
+    var dateString = new Date(n).toLocaleDateString();
+    $('input#VremeDo').blur(function () {
+        if (vrednost === '')
+            $('input#VremeDo').attr('value', dateString);
+    });
+
+</script>

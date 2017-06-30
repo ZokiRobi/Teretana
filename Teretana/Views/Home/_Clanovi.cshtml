@@ -1,0 +1,26 @@
+﻿@model IPagedList<Teretana.Models.Clanovi>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prezime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VremeOd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VremeDo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ClanoviId }) |
+            @Html.ActionLink("Preostalo vreme clanarine", "PreostaloVreme", new { id = item.ClanoviId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ClanoviId }, new { @class = "delete" })
+        </td>
+    </tr>
+}
+
+

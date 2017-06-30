@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TeretanaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AktivnaClanarina">
+    <Key>
+      <PropertyRef Name="AktivnaClanarina1" />
+    </Key>
+    <Property Name="AktivnaClanarina1" Type="Int32" Nullable="false" />
+    <Property Name="ClanoviId" Type="Int32" />
+    <NavigationProperty Name="Clanovi" Relationship="Self.FK_AktivnaClanarina_Clanovi" FromRole="AktivnaClanarina" ToRole="Clanovi" />
+  </EntityType>
+  <EntityType Name="Clanarina">
+    <Key>
+      <PropertyRef Name="ClanarinaId" />
+    </Key>
+    <Property Name="ClanarinaId" Type="Int32" Nullable="false" />
+    <Property Name="ClanoviId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Clanovi" Relationship="Self.FK_Clanarina_Clanovi" FromRole="Clanarina" ToRole="Clanovi" />
+  </EntityType>
+  <EntityType Name="Clanovi">
+    <Key>
+      <PropertyRef Name="ClanoviId" />
+    </Key>
+    <Property Name="ClanoviId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="VremeOd" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="VremeDo" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="AktivnaClanarina" Relationship="Self.FK_AktivnaClanarina_Clanovi" FromRole="Clanovi" ToRole="AktivnaClanarina" />
+    <NavigationProperty Name="Clanarina" Relationship="Self.FK_Clanarina_Clanovi" FromRole="Clanovi" ToRole="Clanarina" />
+    <NavigationProperty Name="DeaktivnaClanarina" Relationship="Self.FK_DeaktivnaClanarina_Clanovi" FromRole="Clanovi" ToRole="DeaktivnaClanarina" />
+  </EntityType>
+  <EntityType Name="DeaktivnaClanarina">
+    <Key>
+      <PropertyRef Name="DeaktivnaClanarina1" />
+    </Key>
+    <Property Name="DeaktivnaClanarina1" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClanoviId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Clanovi" Relationship="Self.FK_DeaktivnaClanarina_Clanovi" FromRole="DeaktivnaClanarina" ToRole="Clanovi" />
+  </EntityType>
+  <Association Name="FK_AktivnaClanarina_Clanovi">
+    <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="0..1" />
+    <End Role="AktivnaClanarina" Type="Self.AktivnaClanarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clanovi">
+        <PropertyRef Name="ClanoviId" />
+      </Principal>
+      <Dependent Role="AktivnaClanarina">
+        <PropertyRef Name="ClanoviId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clanarina_Clanovi">
+    <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="1" />
+    <End Role="Clanarina" Type="Self.Clanarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clanovi">
+        <PropertyRef Name="ClanoviId" />
+      </Principal>
+      <Dependent Role="Clanarina">
+        <PropertyRef Name="ClanoviId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DeaktivnaClanarina_Clanovi">
+    <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="1" />
+    <End Role="DeaktivnaClanarina" Type="Self.DeaktivnaClanarina" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clanovi">
+        <PropertyRef Name="ClanoviId" />
+      </Principal>
+      <Dependent Role="DeaktivnaClanarina">
+        <PropertyRef Name="ClanoviId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TeretanaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AktivnaClanarina" EntityType="Self.AktivnaClanarina" />
+    <EntitySet Name="Clanarina" EntityType="Self.Clanarina" />
+    <EntitySet Name="Clanovi" EntityType="Self.Clanovi" />
+    <EntitySet Name="DeaktivnaClanarina" EntityType="Self.DeaktivnaClanarina" />
+    <AssociationSet Name="FK_AktivnaClanarina_Clanovi" Association="Self.FK_AktivnaClanarina_Clanovi">
+      <End Role="Clanovi" EntitySet="Clanovi" />
+      <End Role="AktivnaClanarina" EntitySet="AktivnaClanarina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clanarina_Clanovi" Association="Self.FK_Clanarina_Clanovi">
+      <End Role="Clanovi" EntitySet="Clanovi" />
+      <End Role="Clanarina" EntitySet="Clanarina" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DeaktivnaClanarina_Clanovi" Association="Self.FK_DeaktivnaClanarina_Clanovi">
+      <End Role="Clanovi" EntitySet="Clanovi" />
+      <End Role="DeaktivnaClanarina" EntitySet="DeaktivnaClanarina" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
